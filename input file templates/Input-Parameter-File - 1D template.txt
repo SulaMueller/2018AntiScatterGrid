@@ -1,0 +1,64 @@
+Input_Parameter_File.txt
+created by Sula Mueller
+20/4/2018
+ASG Creator
+Input_Parameter_File
+--------------------------------------------------------------------------------
+README
+* make sure file name of THIS file is Input-Parameter-File.txt
+* make sure, THIS file is in same directory as program
+
+FORMAT: eg "valuename = 0.5 # remark"
+* need spaces before and after " = "
+* need space AFTER value, everything after space is ignored
+* please ONLY insert values, everything else needs to stay the same!!!!
+* path: end with / or \ , NO SPACES INCLUDED (eg DONT use path: "C:\\My ASG Files\")
+* number format: 56.789
+* matrix format: [x,z] 
+* values in mm
+
+PARAMETERS:
+* [x,z]
+* size: complete dimension; actual edge <-> actual edge of element
+* edge: eg tiles mounted on module leave part of module unused (fe DAS)
+	then "edge" is distance of actual edge of module to point where tile starts
+* gap: distance between 2 elements of same kind
+* N: number of elements IN ONE DIMENSION (eg if number of pixels on one tile = 32x32: [x,z] = [32,32])
+     (NOT total number of elements)
+
+--------------------------------------------------------------------------------
+INSERT VALUES IN THIS SECTION
+
+'''FILE'''  -> 4 inputs
+GRIDTYPE = x/z		# select one: x / z
+OUTpath  = THIS         # use 'THIS' if want to save in current dir, otherwise eg C:/ASG/gridfiles/ 
+OUTname  = example
+FILETYPE = STLA / IGES  # select one: STLA / IGES
+
+'''GRID PARAMETERS'''  -> 2 inputs
+GridRatio = val         # GR = height / thickness of grid
+th_grid   = val         # thickness of leaves
+
+'''SYSTEM PARAMETERS'''  -> 2 inputs
+SDD                = val
+EdgeAxisDifference = -val   # origin of coordinate system -> if want to have have half a pixel shift, include here 
+		            # EAD given in negative values
+		            # EAD is left front edge of module (actual edge; "edge M0" gets added to EAD)
+
+'''MODULE'''  -> 5 inputs
+size_M   = [val,val]   # if size of module not known, it can be calculated, in this case leave blank:  = []
+edge_M0  = val         # "left" side (directly behind CSO)
+edge_M1  = val         # "right" side
+gap_M    = val         # between Modules (only important, if several modules stacked in z-direction)
+nnn      = val         # specifies, which module in z-direction is used
+
+'''TILES'''  -> 4 inputs
+edge_T0 = val
+edge_T1 = val
+gap_T   = val
+N_T     = val
+
+'''PIXEL'''  -> 3 inputs
+N_P    = val   # number of pixels ON TILE in each dimension (NOT number of total pixels on module)
+size_P = val   # optional, only needed if size of module not known (otherwise don't care)
+gap_P  = val   # optional, only needed if size of module not known (otherwise don't care)
